@@ -35,6 +35,20 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.StringValueResolver;
 
 /**
+ * BeanPostProcessor是spring框架的一个扩展点
+ *通过BeanPostProcessor我们可以干预bean的实例化过程
+ *这个接口的实现有多个  会形成一个列表  执行是依次执行
+ *AOP也是通过BeanPostProcessor和IOC容器建立起了联系
+ * 如果是spring自己的提供的实现需要手动添加到列表中
+ * 如果是我们自己定义的只需要在类上添加@Component就可以添加到列表中
+ *下面是一些默认的BeanPostProcessor的实现
+ *
+ *
+ *
+ *
+ *
+ *
+ * 8.AbstractAutoProxyCreator  完成了代理的过程
  * {@link org.springframework.beans.factory.config.BeanPostProcessor}
  * implementation that passes the ApplicationContext to beans that
  * implement the {@link EnvironmentAware}, {@link EmbeddedValueResolverAware},
@@ -116,6 +130,10 @@ class ApplicationContextAwareProcessor implements BeanPostProcessor {
 			if (bean instanceof MessageSourceAware) {
 				((MessageSourceAware) bean).setMessageSource(this.applicationContext);
 			}
+
+			/**
+			 * 单例调用多例的时候 我们就可能会实现该接口ApplicationContextAware  并且在这个地方将applicationContext设置进去
+			 */
 			if (bean instanceof ApplicationContextAware) {
 				((ApplicationContextAware) bean).setApplicationContext(this.applicationContext);
 			}

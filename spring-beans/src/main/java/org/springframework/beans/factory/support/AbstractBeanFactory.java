@@ -239,6 +239,13 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	protected <T> T doGetBean(final String name, @Nullable final Class<T> requiredType,
 			@Nullable final Object[] args, boolean typeCheckOnly) throws BeansException {
 
+		/**
+		 * 通过name获取beanName  这里不使用name直接作为beanName有两个原因
+		 * 1.name可能是以 & 开头 表明使用者想获取FactoryBean 本身   在BeanFactory中 FactoryBean的实现类和其他的bean
+		 * 的存储方式是一致的 即beanName中没有 & 这个字符  所以我要将name中的 字符 & 移除  这样才能从缓存中获取到
+		 * FactoryBean实例
+		 * 2.别名的问题  转换需要
+		 */
 		final String beanName = transformedBeanName(name);
 		Object bean;
 

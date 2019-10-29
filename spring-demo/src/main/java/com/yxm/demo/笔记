@@ -1,0 +1,15 @@
+BeanFactory 是spring中用来产生bean对象的工厂  其中有一个重要的方法就是getBean
+
+声明bean的方式  使用bean标签  @Service   @Bean   FactoryBean
+
+
+FactoryBean的使用场景：
+  当我们维护一个依赖关系很复杂的类   又想提供一种简单的方式去使用的话 就可以使用FactoryBean
+
+  经典应用场景就是   mybatis的SqlSessionFactoryBean
+
+  @PostContruction 可以对缓存进行预热
+
+
+spring中扫描类的方式有三种   1.annotationConfigApplicationContext.register(IndexDao.class);
+                           2. Bean上添加@Service   还有就是注解扫描范围（xml 跟 @ComponentScan）
