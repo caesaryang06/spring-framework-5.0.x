@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  *              代理就是通过这个方式实现代理
  * @Date 2019-10-29 19:31
  */
-@Component
+//@Component
 public class TestBeanPostProcessor implements BeanPostProcessor, PriorityOrdered {
 
 

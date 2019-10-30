@@ -157,6 +157,12 @@ public class AnnotationConfigUtils {
 
 		Set<BeanDefinitionHolder> beanDefs = new LinkedHashSet<>(8);
 
+		/**
+		 * bd注册  这里非常重要  需要理解注册每个bean的类型
+		 * 一个BeanFactoryPostProcessor    五个beanPostProcessor
+		 *
+		 */
+
 		if (!registry.containsBeanDefinition(CONFIGURATION_ANNOTATION_PROCESSOR_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(ConfigurationClassPostProcessor.class);
 			def.setSource(source);

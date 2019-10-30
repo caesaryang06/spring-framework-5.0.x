@@ -1,7 +1,10 @@
 package com.yxm.demo.config;
 
+import com.yxm.demo.annotation.ExtMapperScan;
+import com.yxm.demo.bean.MyImportBeanDefinitionRegistrar;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author CAESAR
@@ -11,5 +14,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan("com.yxm.demo")
+@ExtMapperScan
 public class SpringConfig {
 }

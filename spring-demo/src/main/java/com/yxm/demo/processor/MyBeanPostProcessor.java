@@ -15,7 +15,7 @@ import java.lang.reflect.Proxy;
  *              实现这个PriorityOrdered接口  可以决定在BeanPostProcessor列表中的执行顺序  值越小  越先执行
  * @Date 2019-10-29 19:31
  */
-@Component
+//@Component
 public class MyBeanPostProcessor implements BeanPostProcessor, PriorityOrdered {
 
 

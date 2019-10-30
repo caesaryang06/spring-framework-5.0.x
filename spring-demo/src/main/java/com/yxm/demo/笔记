@@ -13,3 +13,11 @@ FactoryBean的使用场景：
 
 spring中扫描类的方式有三种   1.annotationConfigApplicationContext.register(IndexDao.class);
                            2. Bean上添加@Service   还有就是注解扫描范围（xml 跟 @ComponentScan）
+
+
+
+
+spring中的几个扩展点：
+1.BeanPostProcessor
+2.BeanFactoryPostProcessor
+3.BeanDefinitionRegistryPostProcessor

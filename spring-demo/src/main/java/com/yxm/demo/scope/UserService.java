@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  *                                 2. 实现接口ApplicationContextAware
  * @Date 2019-10-29 20:06
  */
-@Service
+//@Service
 public class UserService implements ApplicationContextAware {
 
    private ApplicationContext context;

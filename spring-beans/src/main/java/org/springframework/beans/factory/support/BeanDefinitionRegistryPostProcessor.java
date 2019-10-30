@@ -20,6 +20,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 
 /**
+ * spring中另一个扩展点
+ *
  * Extension to the standard {@link BeanFactoryPostProcessor} SPI, allowing for
  * the registration of further bean definitions <i>before</i> regular
  * BeanFactoryPostProcessor detection kicks in. In particular,

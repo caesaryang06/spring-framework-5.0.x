@@ -222,7 +222,7 @@ class ConfigurationClassParser {
 			return;
 		}
 
-		ConfigurationClass existingClass = this.configurationClasses.get(configClass);
+  		ConfigurationClass existingClass = this.configurationClasses.get(configClass);
 		if (existingClass != null) {
 			if (configClass.isImported()) {
 				if (existingClass.isImported()) {
@@ -262,6 +262,9 @@ class ConfigurationClassParser {
 			throws IOException {
 
 		// Recursively process any member (nested) classes first
+		/**
+		 * 处理内部类
+		 */
 		processMemberClasses(configClass, sourceClass);
 
 		// Process any @PropertySource annotations

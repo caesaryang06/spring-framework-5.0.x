@@ -85,6 +85,9 @@ abstract class ConfigurationClassUtils {
 		}
 
 		AnnotationMetadata metadata;
+		/**
+		 * 判断是否有添加注解  取出bean的元信息
+		 */
 		if (beanDef instanceof AnnotatedBeanDefinition &&
 				className.equals(((AnnotatedBeanDefinition) beanDef).getMetadata().getClassName())) {
 			// Can reuse the pre-parsed metadata from the given BeanDefinition...
@@ -108,6 +111,11 @@ abstract class ConfigurationClassUtils {
 				return false;
 			}
 		}
+
+
+		/**
+		 * 判断取出来bean的元信息  是否添加了@Configuration
+		 */
 
 		if (isFullConfigurationCandidate(metadata)) {
 			beanDef.setAttribute(CONFIGURATION_CLASS_ATTRIBUTE, CONFIGURATION_CLASS_FULL);

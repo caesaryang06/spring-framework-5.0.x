@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
  * @Description userDao是多例
  * @Date 2019-10-29 20:06
  */
-@Repository
-@Scope("prototype")
+//@Repository
+//@Scope("prototype")
 public class UserDao {
 
 	public void query(){

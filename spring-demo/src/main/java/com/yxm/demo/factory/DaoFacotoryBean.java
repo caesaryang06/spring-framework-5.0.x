@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  *   &daoFactoryBean  对应的是 DaoFacotoryBean的实例   getBean("&daoFactoryBean");
  * @Date 2019-10-29 12:31
  */
-@Component("daoFactoryBean")
+//@Component("daoFactoryBean")
 public class DaoFacotoryBean implements FactoryBean {
 
     public void test(){
