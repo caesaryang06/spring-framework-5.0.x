@@ -72,7 +72,7 @@ final class PostProcessorRegistrationDelegate {
 				else {
 
 					/**
-					 * 保存我们自定义的BeanFactoryPostProcessor
+					 *BeanFactoryPostProcessor
 					 */
 					regularPostProcessors.add(postProcessor);
 				}
@@ -87,6 +87,11 @@ final class PostProcessorRegistrationDelegate {
 			 */
 			List<BeanDefinitionRegistryPostProcessor> currentRegistryProcessors = new ArrayList<>();
 
+
+
+			/**
+			 * 处理BeanDefinitionRegistryPostProcessor   先处理子类
+			 */
 			// First, invoke the BeanDefinitionRegistryPostProcessors that implement PriorityOrdered.
 			/**
 			 * 获取BeanDefinitionRegistryPostProcessor这个接口的所有实例的beanName
@@ -103,11 +108,19 @@ final class PostProcessorRegistrationDelegate {
 			registryProcessors.addAll(currentRegistryProcessors);
 
 			/**
-			 *这里是方法调用
+			 *这里是BeanDefinitionRegistryPostProcessor接口的所有实现的方法执行
+			 *
 			 */
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
+
+
+
 			currentRegistryProcessors.clear();
 
+
+			/**
+			 *
+			 */
 			// Next, invoke the BeanDefinitionRegistryPostProcessors that implement Ordered.
 			postProcessorNames = beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false);
 			for (String ppName : postProcessorNames) {
@@ -121,6 +134,10 @@ final class PostProcessorRegistrationDelegate {
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 			currentRegistryProcessors.clear();
 
+			/**
+			 *
+			 * 下面这个将MapperScan中的包下的Mapper接口bd注册到bdMap中
+			 */
 			// Finally, invoke all other BeanDefinitionRegistryPostProcessors until no further ones appear.
 			boolean reiterate = true;
 			while (reiterate) {
@@ -139,6 +156,10 @@ final class PostProcessorRegistrationDelegate {
 				currentRegistryProcessors.clear();
 			}
 
+
+			/**
+			 * 处理BeanFactoryPostProcessor
+			 */
 			// Now, invoke the postProcessBeanFactory callback of all processors handled so far.
 			invokeBeanFactoryPostProcessors(registryProcessors, beanFactory);
 			invokeBeanFactoryPostProcessors(regularPostProcessors, beanFactory);
@@ -319,6 +340,9 @@ final class PostProcessorRegistrationDelegate {
 	 * BeanPostProcessor that logs an info message when a bean is created during
 	 * BeanPostProcessor instantiation, i.e. when a bean is not eligible for
 	 * getting processed by all BeanPostProcessors.
+	 *
+	 * 当spring中的后置处理器还没有被注册就已经开始了bean的初始化
+	 * 便会打印出日志信息
 	 */
 	private static final class BeanPostProcessorChecker implements BeanPostProcessor {
 

@@ -107,6 +107,9 @@ class ConfigurationClassEnhancer {
 			}
 			return configClass;
 		}
+		/**
+		 * cglib代理
+		 */
 		Class<?> enhancedClass = createClass(newEnhancer(configClass, classLoader));
 		if (logger.isDebugEnabled()) {
 			logger.debug(String.format("Successfully enhanced %s; enhanced class name is: %s",
@@ -120,11 +123,28 @@ class ConfigurationClassEnhancer {
 	 */
 	private Enhancer newEnhancer(Class<?> configSuperClass, @Nullable ClassLoader classLoader) {
 		Enhancer enhancer = new Enhancer();
+		/**
+		 * 增强父类    都知道cglib是基于继承来的  将传入的类设置增强类的父类
+		 */
 		enhancer.setSuperclass(configSuperClass);
+		/**
+		 * 增强接口
+		 * 便于判断  表示一个类以及被增强了
+		 */
 		enhancer.setInterfaces(new Class<?>[] {EnhancedConfiguration.class});
 		enhancer.setUseFactory(false);
 		enhancer.setNamingPolicy(SpringNamingPolicy.INSTANCE);
+		/**
+		 * BeanFactoryAwareGeneratorStrategy是一个生成策略
+		 * 同时基于接口EnhanceConfiguration的父接口BeanFactoryAware中的setBeanFactory()方法
+		 * 设置此变量的值为当前Context中的beanFactory,这样我们这个cglib代理的对象就有了beanFactory
+		 * 有了beanFactory就能获得对象，而不用去通过方法获得对象了 因为通过方法获取对象不可控
+		 * 该BeanFactory的作用就是在this调用的时候拦截该调用 并直接在beanFactory中获得目标bean
+		 */
 		enhancer.setStrategy(new BeanFactoryAwareGeneratorStrategy(classLoader));
+		/**
+		 * 这里是设置对方法的过滤  不能每次都去new对象
+		 */
 		enhancer.setCallbackFilter(CALLBACK_FILTER);
 		enhancer.setCallbackTypes(CALLBACK_FILTER.getCallbackTypes());
 		return enhancer;
@@ -317,6 +337,9 @@ class ConfigurationClassEnhancer {
 		public Object intercept(Object enhancedConfigInstance, Method beanMethod, Object[] beanMethodArgs,
 					MethodProxy cglibMethodProxy) throws Throwable {
 
+			/**
+			 * 代理对象   enhancedConfigInstance
+			 */
 			ConfigurableBeanFactory beanFactory = getBeanFactory(enhancedConfigInstance);
 			String beanName = BeanAnnotationHelper.determineBeanNameFor(beanMethod);
 
@@ -348,6 +371,11 @@ class ConfigurationClassEnhancer {
 				}
 			}
 
+			/**
+			 * 判断代理方法跟当前执行的方法是不是同一个方法
+			 * 如果是 就调用父类方法
+			 * 如果不是 就从beanFactory中获取
+			 */
 			if (isCurrentlyInvokedFactoryMethod(beanMethod)) {
 				// The factory is calling the bean method in order to instantiate and register the bean
 				// (i.e. via a getBean() call) -> invoke the super implementation of the method to actually

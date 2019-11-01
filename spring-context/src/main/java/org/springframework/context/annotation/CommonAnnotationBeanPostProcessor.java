@@ -73,6 +73,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.util.StringValueResolver;
 
 /**
+ * 处理注解 @PreDestroy 和 @PostConstruct    ------caesaryang
+ *
+ *
+ *
  * {@link org.springframework.beans.factory.config.BeanPostProcessor} implementation
  * that supports common Java annotations out of the box, in particular the JSR-250
  * annotations in the {@code javax.annotation} package. These common Java

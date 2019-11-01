@@ -5,6 +5,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
+import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 
 
@@ -29,8 +30,6 @@ public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegi
 		 * 1.得到bd
 		 */
 		//扫描所有接口
-
-		// 获取接口的代理对象
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(UserMapper.class);
 		GenericBeanDefinition beanDefinition = (GenericBeanDefinition) builder.getBeanDefinition();
 		System.out.println(beanDefinition.getBeanClassName());

@@ -1,5 +1,6 @@
 package com.yxm.demo;
 
+import com.yxm.demo.config.SpringConfig;
 import com.yxm.demo.factory.DaoFacotoryBean;
 import com.yxm.demo.factory.UseDaoFactoryBean;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -19,10 +20,10 @@ public class Test {
 		// 初始化的一个空的spring容器
 		AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext();
 		// 1.注册一个bean  也可以注册SpringConfig(javaconfig类)
-		//annotationConfigApplicationContext.register(IndexDao.class);
+		annotationConfigApplicationContext.register(SpringConfig.class);
 
 		// 2. 注册bean   Bean上添加注解   再加上设置扫描范围
-		annotationConfigApplicationContext.scan("com.yxm.demo");
+//		annotationConfigApplicationContext.scan("com.yxm.demo");
 		// 刷新容器
 		annotationConfigApplicationContext.refresh();
 		// 获取bean的实例
