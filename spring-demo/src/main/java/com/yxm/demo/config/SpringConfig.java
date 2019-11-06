@@ -20,7 +20,7 @@ import org.springframework.util.StringUtils;
                  // beanFactory   该代理对象调用对象方法（不包含静态方法  这里的方法特指带有注解@Bean的方法）的时候  会先判断beanFactory中是是否
                  // 存在该实例 如果存在  就从beanFactory中获取  如果不存在  就调用该方法中的逻辑
                  //BeanMethodInterceptor  这个是方法过滤  BeanFactoryAwareMethodInterceptor  这个就是为了拿到Beanfactory
-@ComponentScan("com.yxm.demo")
+@ComponentScan("com.yxm.demo.service")
 //@ExtImportAware(basePackeg = "com.yxm.demo")
 public class SpringConfig {
 

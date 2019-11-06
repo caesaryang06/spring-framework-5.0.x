@@ -14,4 +14,7 @@ repositories {
 dependencies {
     compile project(':spring-context')
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.mybatis:mybatis:3.4.6'
+    compile 'org.mybatis:mybatis-spring:2.0.3'
+
 }

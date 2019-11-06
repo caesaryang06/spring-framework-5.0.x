@@ -15,7 +15,7 @@ import javax.annotation.PostConstruct;
  * @time 2019/5/1217:25
  * @modificationHistory <记录修改历史记录 who where what>
  */
-@Repository("indexDao")
+//@Repository("indexDao")
 public class IndexDao implements InitializingBean{
 
 	private String name;

@@ -549,24 +549,41 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 
 				/**
-				 * aop拦截器 -------注册beanPostProcessor   就是将后置处理器添加到集合中
+				 * 添加处理aop的后置处理器-------注册beanPostProcessor   就是将后置处理器添加到集合中
+				 * AspectJAutoProxyRegistrar
 				 */
 				// Register bean processors that intercept bean creation.
 				registerBeanPostProcessors(beanFactory);
 
 				// Initialize message source for this context.
+				/**
+				 * 国际化
+				 */
 				initMessageSource();
 
 				// Initialize event multicaster for this context.
+				/**
+				 * spring event事件
+				 */
 				initApplicationEventMulticaster();
 
 				// Initialize other special beans in specific context subclasses.
+				/**
+				 * 空壳方法  目前没有实现
+				 */
 				onRefresh();
 
 				// Check for listener beans and register them.
+				/**
+				 * 监听器
+				 */
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons.
+				/**
+				 * 上面所有都是在为实例化做准备工作
+				 * 这个方法就是实例化bean
+				 */
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.

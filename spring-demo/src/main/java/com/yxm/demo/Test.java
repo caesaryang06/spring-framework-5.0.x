@@ -27,8 +27,8 @@ public class Test {
 		// 刷新容器
 		annotationConfigApplicationContext.refresh();
 		// 获取bean的实例
-		IndexDao indexDao = annotationConfigApplicationContext.getBean(IndexDao.class);
-		indexDao.hello();
+//		IndexDao indexDao = annotationConfigApplicationContext.getBean(IndexDao.class);
+//		indexDao.hello();
 	}
 
 
