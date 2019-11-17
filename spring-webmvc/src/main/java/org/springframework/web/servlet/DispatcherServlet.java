@@ -28,6 +28,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -151,7 +152,7 @@ import org.springframework.web.util.WebUtils;
  * @author Chris Beams
  * @author Rossen Stoyanchev
  * @see org.springframework.web.HttpRequestHandler
- * @see org.springframework.web.servlet.mvc.Controller
+ * @see org.springframework.web.servlet.mvc.Controllerinit
  * @see org.springframework.web.context.ContextLoaderListener
  */
 @SuppressWarnings("serial")
@@ -365,6 +366,11 @@ public class DispatcherServlet extends FrameworkServlet {
 		setDispatchOptionsRequest(true);
 	}
 
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+	}
+
 	/**
 	 * Create a new {@code DispatcherServlet} with the given web application context. This
 	 * constructor is useful in Servlet 3.0+ environments where instance-based registration
@@ -407,6 +413,11 @@ public class DispatcherServlet extends FrameworkServlet {
 	public DispatcherServlet(WebApplicationContext webApplicationContext) {
 		super(webApplicationContext);
 		setDispatchOptionsRequest(true);
+	}
+
+	@Override
+	protected void initFrameworkServlet() throws ServletException {
+		super.initFrameworkServlet();
 	}
 
 
@@ -961,6 +972,11 @@ public class DispatcherServlet extends FrameworkServlet {
 				multipartRequestParsed = (processedRequest != request);
 
 				// Determine handler for the current request.
+
+				/**
+				 * 推断controller的类型
+				 */
+
 				mappedHandler = getHandler(processedRequest);
 				if (mappedHandler == null) {
 					noHandlerFound(processedRequest, response);

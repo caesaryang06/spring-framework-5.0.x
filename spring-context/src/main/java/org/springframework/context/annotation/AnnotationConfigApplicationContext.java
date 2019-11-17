@@ -64,7 +64,7 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	public AnnotationConfigApplicationContext() {
 		/**
 		 * BeanDefination  用来描述Bean的元信息
-		 * 读取有注解的类的BeanDefination
+		 * 读取被加了注解的类
 		 */
 		this.reader = new AnnotatedBeanDefinitionReader(this);
 
@@ -102,7 +102,7 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 
 
 		/**
-		 * 将包含bean信息的对象注册到map中  其他  key是beanNam   value  beanDefination
+		 * （这里有可能Javaconfig类  也可能是spring bean）将包含bean信息的对象注册到map中  其中  key是beanNam   value  beanDefination
 		 */
 		register(annotatedClasses);
 
@@ -186,6 +186,7 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	}
 
 	/**
+	 * 执行扫描指定的包名
 	 * Perform a scan within the specified base packages.
 	 * <p>Note that {@link #refresh()} must be called in order for the context
 	 * to fully process the new classes.

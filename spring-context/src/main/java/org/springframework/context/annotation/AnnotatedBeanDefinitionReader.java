@@ -219,7 +219,7 @@ public class AnnotatedBeanDefinitionReader {
 		 */
 		AnnotatedGenericBeanDefinition abd = new AnnotatedGenericBeanDefinition(annotatedClass);
 		/**
-		 * 判断是否要跳过解析
+		 * 判断是否要跳过解析  这里判断的是是否添加注解@Conditional的  如果没有添加 向下执行
 		 */
 		if (this.conditionEvaluator.shouldSkip(abd.getMetadata())) {
 			return;
